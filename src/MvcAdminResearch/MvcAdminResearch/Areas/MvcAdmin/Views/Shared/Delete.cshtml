@@ -1,0 +1,50 @@
+﻿@model Object
+
+@using System.Reflection
+@using System.Linq.Expressions
+@using MvcAdminResearch.Helpers
+
+
+@{
+    ViewBag.Title = "Delete";
+
+    var myObject = Model;
+    Type myType = myObject.GetType();
+
+    DataContextHost host = new DataContextHost(myType, typeof(MvcAdminResearch.Models.NotesappContext));
+    var propsEligible = ScaffoldHelpers.GetEligibleProperties(myType, host);
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+      <legend>@myObject.GetType().Name</legend>
+        @foreach (var prop in propsEligible)
+        {
+            if (!prop.IsPrimaryKey && !prop.IsReadOnly && !prop.IsForeignKey)
+            {
+            <div class="editor-label">
+                @Html.Label(prop.Name)
+            </div>
+            <div class="editor-field">
+                @Html.Display(prop.Name)
+            </div>
+            }
+            else if (prop.IsForeignKey)
+            {
+            <div class="editor-label">
+                @Html.Label(prop.Name)
+            </div>
+            <div class="editor-field">
+                @Html.Display(prop.Name)
+            </div>
+            }
+        }
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}

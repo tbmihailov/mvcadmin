@@ -1,0 +1,50 @@
+﻿model Object
+
+@using System.Reflection
+@using System.Linq.Expressions
+@using MvcAdminResearch.Helpers
+
+
+@{
+    ViewBag.Title = "Details";
+
+    var myObject = Model;
+    Type myType = myObject.GetType();
+
+    DataContextHost host = new DataContextHost(myType, typeof(MvcAdminResearch.Models.NotesappContext));
+    var propsEligible = ScaffoldHelpers.GetEligibleProperties(myType, host);
+
+    string primaryKeyName = host.ModelProperties.FirstOrDefault(p=>p.IsPrimaryKey).Name;
+    var priamryKeyValue = myType.GetProperty(primaryKeyName).GetValue(myObject);
+}
+
+<h2>Details</h2>
+
+<fieldset>
+     <legend>@myObject.GetType().Name</legend>
+        @foreach (var prop in propsEligible)
+        {
+            if (!prop.IsPrimaryKey && !prop.IsReadOnly && !prop.IsForeignKey)
+            {
+            <div class="editor-label">
+                @Html.Label(prop.Name)
+            </div>
+            <div class="editor-field">
+                @Html.Display(prop.Name)
+            </div>
+            }
+            else if (prop.IsForeignKey)
+            {
+            <div class="editor-label">
+                @Html.Label(prop.Name)
+            </div>
+            <div class="editor-field">
+                @Html.Display(prop.Name)
+            </div>
+            }
+        }
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = @priamryKeyValue}) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

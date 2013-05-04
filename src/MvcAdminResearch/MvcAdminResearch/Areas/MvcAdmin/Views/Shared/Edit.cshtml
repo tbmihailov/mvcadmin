@@ -1,0 +1,64 @@
+﻿@model Object
+
+@using System.Reflection
+@using System.Linq.Expressions
+@using MvcAdminResearch.Helpers
+
+
+@{
+    ViewBag.Title = "Edit";
+
+    var myObject = Model;
+    Type myType = myObject.GetType();
+
+    DataContextHost host = new DataContextHost(myType, typeof(MvcAdminResearch.Models.NotesappContext));
+    var propsEligible = ScaffoldHelpers.GetEligibleProperties(myType, host);
+}
+
+<h2>Edit</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.ValidationSummary(true)
+
+    <fieldset>
+        <legend>@myObject.GetType().Name</legend>
+        @foreach (var prop in propsEligible)
+        {
+            if (!prop.IsPrimaryKey && !prop.IsReadOnly && !prop.IsForeignKey)
+            {
+            <div class="editor-label">
+                @Html.Label(prop.Name)
+            </div>
+            <div class="editor-field">
+                @Html.Editor(prop.Name)
+                @Html.ValidationMessage(prop.Name)
+            </div>
+            }
+            else if (prop.IsForeignKey)
+            {
+            <div class="editor-label">
+                @Html.Label(prop.Name)
+            </div>
+            <div class="editor-field">
+                @Html.DropDownList(prop.Name)
+                @Html.ValidationMessage(prop.Name)
+            </div> 
+            }
+            else if (prop.IsPrimaryKey)
+            {
+                @Html.Hidden(prop.Name);
+            }
+        }
+        <p>
+            <input type="submit" value="Save" />
+        </p>
+    </fieldset>
+}
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

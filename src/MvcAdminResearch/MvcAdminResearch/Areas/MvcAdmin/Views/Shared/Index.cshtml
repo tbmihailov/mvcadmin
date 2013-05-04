@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Object>
+
+@using System.Reflection
+@using System.Linq.Expressions
+@using MvcAdminResearch.Helpers
+
+
+@{
+    ViewBag.Title = "Index";
+
+    var myObject = Model;
+    Type myType = myObject.GetType().GetGenericArguments()[0];
+
+    DataContextHost host = new DataContextHost(myType, typeof(MvcAdminResearch.Models.NotesappContext));
+    var propsEligible = ScaffoldHelpers.GetEligibleProperties(myType, host);
+    var displayPropertyNames = ScaffoldHelpers.GetDisplayPropertyNames(myType, 5);
+    string primaryKeyName = host.ModelProperties.FirstOrDefault(p => p.IsPrimaryKey).Name;
+    
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        @foreach (var propName in displayPropertyNames)
+        {
+            <th>@Html.DisplayName(propName)</th>
+        }
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            @foreach (var propName in displayPropertyNames)
+            {
+                <th>@Html.Display("item." + propName)</th>
+            }
+
+            @{var priamryKeyValue = myType.GetProperty(primaryKeyName).GetValue(item);
+            
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = @priamryKeyValue }) |
+            @Html.ActionLink("Details", "Details", new { id = @priamryKeyValue }) |
+            @Html.ActionLink("Delete", "Delete", new { id = @priamryKeyValue })
+                </td>
+            }
+        </tr>
+    }
+
+</table>
