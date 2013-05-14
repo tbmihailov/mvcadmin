@@ -1,5 +1,6 @@
 ﻿using MvcAdminResearch.Areas.MvcAdmin.Controllers;
 using System.Web.Mvc;
+using System.Web.Optimization;
 
 namespace MvcAdminResearch.Areas.MvcAdmin
 {
@@ -15,12 +16,23 @@ namespace MvcAdminResearch.Areas.MvcAdmin
 
         public override void RegisterArea(AreaRegistrationContext context)
         {
+            RegisterRoutes(context);
+            RegisterBundles();
+        }
+
+        private static void RegisterRoutes(AreaRegistrationContext context)
+        {
             context.MapRoute(
                 "MvcAdmin_models",
                 "MvcAdmin/Models/{controller}/{action}/{id}",
-                new { controllerFactory = new GenericControllerFactory(),//custom controller factory
-                      dataContextType = typeof(MvcAdminResearch.Models.NotesappContext),//Data context type  
-                      controller="Note", action = "Index", id = UrlParameter.Optional }
+                new
+                {
+                    controllerFactory = new GenericControllerFactory(),//custom controller factory
+                    dataContextType = typeof(MvcAdminResearch.Models.NotesappContext),//Data context type  
+                    controller = "Note",
+                    action = "Index",
+                    id = UrlParameter.Optional
+                }
             );
 
             context.MapRoute(
@@ -34,5 +46,10 @@ namespace MvcAdminResearch.Areas.MvcAdmin
                 }
             );
         }
+
+        private void RegisterBundles()
+        {
+            BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }  
     }
 }

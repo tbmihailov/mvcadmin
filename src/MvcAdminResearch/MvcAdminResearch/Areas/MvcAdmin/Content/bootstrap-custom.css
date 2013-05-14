@@ -1,0 +1,79 @@
+/*homepage masthead*/
+
+.navbar-inner {
+    /*#454B56,  #393F48 - kofa green*/
+    /*dark  #454B56, #393F48);*/
+    background-color: #fafafa;
+    background-image: -moz-linear-gradient(top, #454B56, #393F48);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#454B56), to( #393F48));
+    background-image: -webkit-linear-gradient(top, #454B56, #393F48);
+    background-image: -o-linear-gradient(top, #454B56, #393F48);
+    background-image: linear-gradient(to bottom, #454B56, #393F48);
+    background-repeat: repeat-x;
+    border: 1px solid #d4d4d4;
+    -webkit-border-radius: 4px;
+    -moz-border-radius: 4px;
+    border-radius: 4px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#454B56ff', endColorstr='#fff2f2f2', GradientType=0);
+    *zoom: 1;
+    -webkit-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+    -moz-box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.065);
+}
+
+.navbar .nav > li > a {
+    float: none;
+    padding: 10px 15px 10px;
+    color: #ffffff;
+    text-decoration: none;
+    text-shadow: 0 0px 0;
+}
+
+.navbar .brand {
+    color: #ffffff;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+body {
+    /*background: url("/images/background-noise.png")repeat scroll 0 0 #F7f7f7;*/
+    overflow-y: scroll;
+}
+
+.navbar .btn-navbar {
+    background-color: #454B56;
+    background-image: linear-gradient(to bottom, #454B56, #393F48);
+    background-repeat: repeat-x;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.075);
+    color: #FFFFFF;
+    display: none;
+    float: right;
+    margin-left: 5px;
+    margin-right: 5px;
+    padding: 7px 10px;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+}
+
+    .navbar .btn-navbar .icon-bar {
+        background-color: #454B56;
+    }
+/*.navbar .nav > li > a:focus,
+.navbar .nav > li > a:hover {
+  color: #333333;
+  text-decoration: none;
+  background-color: transparent;
+}*/
+
+
+.container-main {
+    background-color: #ffffff;
+    border-radius: 5px;
+    padding: 15px;
+}
+
+.main-logo {
+    background: url("");
+}
+
+

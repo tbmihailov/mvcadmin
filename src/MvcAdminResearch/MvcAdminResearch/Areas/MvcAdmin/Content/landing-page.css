@@ -1,0 +1,111 @@
+﻿.jumbotron {
+    background-color: #2E3133;
+    box-shadow: 0 3px 7px rgba(0, 0, 0, 0.2) inset, 0 -3px 7px rgba(0, 0, 0, 0.2) inset;
+    color: #FFFFFF;
+    padding: 40px 0;
+    position: relative;
+    text-align: center;
+    margin-top:-60px;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
+}
+.jumbotron h1 {
+    font-size: 80px;
+    font-weight: bold;
+    letter-spacing: -1px;
+    line-height: 1;
+}
+.jumbotron p {
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 1.25;
+    margin-bottom: 30px;
+}
+.jumbotron a {
+    color: rgba(255, 255, 255, 0.5);
+    transition: all 0.2s ease-in-out 0s;
+}
+.jumbotron a:hover {
+    color: #FFFFFF;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.25);
+}
+.masthead .btn {
+    border: 0 none;
+    border-radius: 6px 6px 6px 6px;
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 1px 5px rgba(0, 0, 0, 0.25);
+    color: #FFFFFF;
+    font-size: 24px;
+    font-weight: 200;
+    padding: 19px 24px;
+    transition: none 0s ease 0s;
+}
+.masthead .btn:hover {
+    box-shadow: 0 1px 0 rgba(255, 255, 255, 0.1) inset, 0 1px 5px rgba(0, 0, 0, 0.25);
+}
+.masthead .btn:active {
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) inset, 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+.jumbotron .container {
+    position: relative;
+    z-index: 2;
+}
+.jumbotron:after {
+    background: url("../img/bs-docs-masthead-pattern.png") repeat scroll center center transparent;
+    bottom: 0;
+    content: "";
+    display: block;
+    left: 0;
+    opacity: 0.4;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.jumbotron:after {
+    background-size: 150px 150px;
+}
+.masthead {
+    color: #FFFFFF;
+    margin-bottom: 0;
+    padding: 70px 0 80px;
+}
+
+.navbar-masthead {
+    color: #333333;
+}
+
+.masthead h1 {
+    font-size: 120px;
+    letter-spacing: -2px;
+    line-height: 1;
+}
+.masthead p {
+    font-size: 40px;
+    font-weight: 200;
+    line-height: 1.25;
+}
+.masthead-links {
+    list-style: none outside none;
+    margin-top: 20px;
+}
+.masthead-links li {
+    color: rgba(255, 255, 255, 0.25);
+    display: inline;
+    padding: 0px 10px;
+}
+.bs-docs-social {
+    background-color: #F5F5F5;
+    border-bottom: 1px solid #DDDDDD;
+    border-top: 1px solid #FFFFFF;
+    padding: 15px 0;
+    text-align: center;
+}
+.bs-docs-social-buttons {
+    list-style: none outside none;
+    margin-bottom: 0;
+    margin-left: 0;
+    padding-left: 0;
+}
+.bs-docs-social-buttons li {
+    display: inline-block;
+    line-height: 1;
+    padding: 5px 8px;
+}
