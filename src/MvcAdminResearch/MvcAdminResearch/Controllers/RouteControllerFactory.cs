@@ -16,7 +16,8 @@ namespace MvcAdminResearch.Controllers
             requestContext.RouteData.Values.TryGetValue("controllerFactory", out controllerFactoryRes);
             var controllerFactory = controllerFactoryRes as IControllerFactory;
             
-            IController controller = (controllerFactory??Default).CreateController(requestContext, controllerName);
+            var factoryToUse = (controllerFactory??Default);
+            IController controller = factoryToUse.CreateController(requestContext, controllerName);
             return controller;
         }
 

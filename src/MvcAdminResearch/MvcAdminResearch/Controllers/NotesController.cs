@@ -27,6 +27,7 @@ namespace MvcAdminResearch.Controllers
         public ActionResult Details(int id = 0)
         {
             Note note = db.Notes.Find(id);
+            
             if (note == null)
             {
                 return HttpNotFound();

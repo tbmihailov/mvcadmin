@@ -37,15 +37,15 @@
         <tr>
             @foreach (var propName in displayPropertyNames)
             {
-                <th>@Html.Display("item." + propName)</th>
+                <th>@myType.GetProperty(propName).GetValue(item)</th>
             }
 
             @{var priamryKeyValue = myType.GetProperty(primaryKeyName).GetValue(item);
             
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = @priamryKeyValue }) |
-            @Html.ActionLink("Details", "Details", new { id = @priamryKeyValue }) |
-            @Html.ActionLink("Delete", "Delete", new { id = @priamryKeyValue })
+                    @Html.ActionLink("Details", "Details", new { id = @priamryKeyValue }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = @priamryKeyValue })
                 </td>
             }
         </tr>

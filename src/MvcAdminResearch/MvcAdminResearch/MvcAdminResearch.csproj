@@ -183,7 +183,10 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Areas\MvcAdmin\BundleConfig.cs" />
+    <Compile Include="Areas\MvcAdmin\Controllers\CustomControllerFactory.cs" />
     <Compile Include="Areas\MvcAdmin\Controllers\GenericControllerFactory.cs" />
+    <Compile Include="Areas\MvcAdmin\Models\ModelInfoDto.cs" />
+    <Compile Include="Areas\MvcAdmin\Models\MvcAdminConfiguration.cs" />
     <Compile Include="Areas\MvcAdmin\MvcAdminAreaRegistration.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Areas\MvcAdmin\Controllers\GenericController.cs" />
@@ -430,11 +433,6 @@
     <Content Include="Areas\MvcAdmin\Views\Shared\Create.cshtml" />
     <Content Include="Areas\MvcAdmin\Views\Shared\Edit.cshtml" />
     <Content Include="Areas\MvcAdmin\Views\Shared\Delete.cshtml" />
-    <Content Include="Areas\MvcAdmin\Views\Note\Index.cshtml" />
-    <Content Include="Areas\MvcAdmin\Views\Note\Details.cshtml" />
-    <Content Include="Areas\MvcAdmin\Views\Note\Create.cshtml" />
-    <Content Include="Areas\MvcAdmin\Views\Note\Edit.cshtml" />
-    <Content Include="Areas\MvcAdmin\Views\Note\Delete.cshtml" />
     <Content Include="Areas\MvcAdmin\Views\Panel\Dashboard.cshtml" />
     <Content Include="Views\GenNotes\Create.cshtml" />
     <Content Include="Views\GenNotes\Delete.cshtml" />
@@ -444,7 +442,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Areas\MvcAdmin\Models\" />
     <Folder Include="Areas\MvcAdmin\Views\Generic\" />
     <Folder Include="Controllers\MvcAdmin\" />
   </ItemGroup>

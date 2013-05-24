@@ -1,6 +1,43 @@
 ﻿@{
     Layout = "~/Areas/MvcAdmin/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Dashboard";
+
+    var modelInfos = (List<MvcAdminResearch.Areas.MvcAdmin.Models.ModelInfoDto>)ViewBag.ModelInfos;
 }
 
 <h2>Dashboard</h2>
+@if (modelInfos != null)
+{
+    int recNum = 0;
+    <table>
+    <tr>
+        <th>
+            #
+        </th> 
+        <th>
+            Collection
+        </th>
+        <th>
+            Records
+        </th>
+        <th></th>
+    </tr>
+        
+@foreach (var item in modelInfos) {
+    recNum++;
+    <tr>
+        
+        <td>
+            @recNum
+        </td>
+        <td>
+            <a href="@Url.RouteUrl("MvcAdmin_Generic", new { controller = item.ControllerName})">@item.DisplayName</a>
+        </td>
+        <td>
+            @item.RecordsCount
+        </td> 
+    </tr>
+}
+
+</table>
+}

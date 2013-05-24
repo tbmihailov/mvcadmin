@@ -1,4 +1,5 @@
 ﻿using MvcAdminResearch.Areas.MvcAdmin.Controllers;
+using MvcAdminResearch.Models;
 using System.Web.Mvc;
 using System.Web.Optimization;
 
@@ -23,25 +24,41 @@ namespace MvcAdminResearch.Areas.MvcAdmin
         private static void RegisterRoutes(AreaRegistrationContext context)
         {
             context.MapRoute(
-                "MvcAdmin_models",
-                "MvcAdmin/Models/{controller}/{action}/{id}",
+                "MvcAdmin_panel",
+                "MvcAdmin/Panel/{action}/{id}",
+                new
+                {
+                    controller = "Panel",//not used
+                    action = "Dashboard",
+                    id = UrlParameter.Optional,
+
+                    controllerFactory = new CustomControllerFactory(),//custom controller factory
+                    controllerType = typeof(PanelController<NotesappContext>)//custom controller
+                }
+            );
+
+            context.MapRoute(
+                "MvcAdmin_default",
+                "MvcAdmin",
+                new
+                {
+                    controller = "Panel",
+                    action = "Dashboard",
+                    id = UrlParameter.Optional,
+                    controllerFactory = new CustomControllerFactory(),//custom controller factory
+                    controllerType = typeof(PanelController<NotesappContext>)//custom controller
+                }
+            );
+
+            context.MapRoute(
+                "MvcAdmin_Generic",
+                "MvcAdmin/m/{controller}/{action}/{id}",
                 new
                 {
                     controllerFactory = new GenericControllerFactory(),//custom controller factory
                     dataContextType = typeof(MvcAdminResearch.Models.NotesappContext),//Data context type  
                     controller = "Note",
                     action = "Index",
-                    id = UrlParameter.Optional
-                }
-            );
-
-            context.MapRoute(
-                "MvcAdmin_default",
-                "MvcAdmin/{controller}/{action}/{id}",
-                new
-                {
-                    controller = "Panel",
-                    action = "Dashboard",
                     id = UrlParameter.Optional
                 }
             );

@@ -41,13 +41,15 @@ namespace MvcAdminResearch.Helpers
         public DataContextHost(Type modelType, Type contextType)
         {
             this.ContextType = contextType;
-            this.ModelType = modelType;
-            this.ModelTypeName = modelType.Name;
 
-            this.EntitySetName = contextType.GetModelCollectionPropertiesDbContext().Where(p => p.PropertyType.GetGenericArguments()[0].Name == modelType.Name).FirstOrDefault().Name;
+            var modelTypeNoProxy = ObjectContext.GetObjectType(modelType);//returns poco type if proxy(EF creates proxy for entity models)
+            this.ModelType = modelTypeNoProxy;
+            this.ModelTypeName = modelTypeNoProxy.Name;
 
-            this.RelatedProperties = contextType.GetRelatedProperties(modelType);
-            this.ModelProperties = ScaffoldHelpers.GetEligibleProperties(modelType, this);
+            this.EntitySetName = contextType.GetModelCollectionPropertiesDbContext().Where(p => p.PropertyType.GetGenericArguments()[0].Name == modelTypeNoProxy.Name).FirstOrDefault().Name;
+
+            this.RelatedProperties = contextType.GetRelatedProperties(modelTypeNoProxy);
+            this.ModelProperties = ScaffoldHelpers.GetEligibleProperties(modelTypeNoProxy, this);
         }
 
     }
@@ -108,8 +110,8 @@ namespace MvcAdminResearch.Helpers
 
         public static string[] GetDisplayPropertyNames(Type type, int count)
         {
-            
-            var properties = type.GetProperties().Select(p => p.Name).ToList();
+
+            var properties = type.GetProperties().Where(p => BindableNonPrimitiveTypes.Contains(p.PropertyType)).Select(p => p.Name).ToList();
             if (properties.Count < count)
             {
                 count = properties.Count;
@@ -119,6 +121,11 @@ namespace MvcAdminResearch.Helpers
             int currCnt = 0;
             foreach (var propName in DisplayPropertyNames)
             {
+                if (!properties.Contains(propName))
+                {
+                    continue;
+                }
+
                 selectedProperties.Add(propName);
                 properties.Remove(propName);
                 currCnt++;

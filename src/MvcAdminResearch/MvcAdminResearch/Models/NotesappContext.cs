@@ -1,4 +1,5 @@
 ﻿using System.Data.Entity;
+using System.Data.Entity.Infrastructure;
 
 namespace MvcAdminResearch.Models
 {
@@ -15,7 +16,16 @@ namespace MvcAdminResearch.Models
 
         public NotesappContext() : base("name=NotesappContext")
         {
+            var objectContext = ((IObjectContextAdapter)this).ObjectContext;
+            objectContext.SavingChanges += objectContext_SavingChanges;
         }
+
+        void objectContext_SavingChanges(object sender, System.EventArgs e)
+        {
+            
+        }
+
+        
 
         public DbSet<Note> Notes { get; set; }
         public DbSet<Category> Categories { get; set; }
@@ -24,6 +34,8 @@ namespace MvcAdminResearch.Models
         {
             Database.SetInitializer<NotesappContext>(new DropCreateDatabaseIfModelChanges<NotesappContext>());
             base.OnModelCreating(modelBuilder);
+
+            
         }
     }
 }
