@@ -21,9 +21,9 @@
 <h2>Index</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Create New", "Create", null, new { @class="btn"})
 </p>
-<table>
+<table class="table table-hover">
     <tr>
         @foreach (var propName in displayPropertyNames)
         {
@@ -42,11 +42,11 @@
 
             @{var priamryKeyValue = myType.GetProperty(primaryKeyName).GetValue(item);
             
-                <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = @priamryKeyValue }) |
-                    @Html.ActionLink("Details", "Details", new { id = @priamryKeyValue }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = @priamryKeyValue })
-                </td>
+                		<td>
+			@Html.ActionLink("Edit", "Edit", new { id=priamryKeyValue }, new { @class="btn btn-primary" }) |
+			@Html.ActionLink("Details", "Details", new { id=priamryKeyValue }, new { @class="btn btn-info" }) |
+			@Html.ActionLink("Delete", "Delete", new { id=priamryKeyValue }, new { @class="btn btn-danger" })
+		</td>
             }
         </tr>
     }

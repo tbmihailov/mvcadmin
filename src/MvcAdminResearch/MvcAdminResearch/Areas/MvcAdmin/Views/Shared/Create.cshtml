@@ -27,28 +27,35 @@
         {
             if (!prop.IsPrimaryKey && !prop.IsReadOnly && !prop.IsForeignKey)
             {
-            <div class="editor-label">
-                @Html.Label(prop.Name)
-            </div>
-            <div class="editor-field">
-                @Html.Editor(prop.Name)
-                @Html.ValidationMessage(prop.Name)
-            </div>
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label(prop.Name)
+                </dt>
+                <dd>
+                    @Html.Editor(prop.Name)
+                    @Html.ValidationMessage(prop.Name)
+                </dd>
+            </dl>
             }
             else if (prop.IsForeignKey)
             {
-            <div class="editor-label">
-                @Html.Label(prop.Name)
-            </div>
-            <div class="editor-field">
-                @Html.DropDownList(prop.Name)
-                @Html.ValidationMessage(prop.Name)
-            </div> 
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.Label(prop.Name)
+                </dt>
+                <dd>
+                    @Html.DropDownList(prop.Name)
+                    @Html.ValidationMessage(prop.Name)
+                </dd>
+            </dl> 
             }
         }
-        <p>
-            <input type="submit" value="Create" />
-        </p>
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                &nbsp; @Html.ActionLink("Cancel", "Index", null, new { @class = "btn" })
+            </div>
+        </div>
     </fieldset>
 }
 

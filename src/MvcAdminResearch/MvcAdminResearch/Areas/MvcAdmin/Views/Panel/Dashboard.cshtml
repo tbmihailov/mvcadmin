@@ -3,41 +3,71 @@
     ViewBag.Title = "Dashboard";
 
     var modelInfos = (List<MvcAdminResearch.Areas.MvcAdmin.Models.ModelInfoDto>)ViewBag.ModelInfos;
+    int allRecords = modelInfos.Sum(mi => mi.RecordsCount);
 }
 
 <h2>Dashboard</h2>
-@if (modelInfos != null)
-{
-    int recNum = 0;
-    <table>
-    <tr>
-        <th>
-            #
-        </th> 
-        <th>
-            Collection
-        </th>
-        <th>
-            Records
-        </th>
-        <th></th>
-    </tr>
-        
-@foreach (var item in modelInfos) {
-    recNum++;
-    <tr>
-        
-        <td>
-            @recNum
-        </td>
-        <td>
-            <a href="@Url.RouteUrl("MvcAdmin_Generic", new { controller = item.ControllerName})">@item.DisplayName</a>
-        </td>
-        <td>
-            @item.RecordsCount
-        </td> 
-    </tr>
-}
+<div class="row">
+    <div class="span3">
+        <div class="well" style="padding: 8px 0; margin-bottom: 0;">
+            <ul class="nav nav-list">
+                @if (modelInfos != null)
+                {
+                    foreach (var item in modelInfos)
+                    {
+                    <li><a href="@Url.RouteUrl("MvcAdmin_Generic", new { controller = item.ControllerName, action = "Index" })"><i class="i"></i>@item.DisplayName</a></li>
+                    }
+                
+@*<li class="active"><a href="#"><i class="icon-book"></i>Library</a></li>
+                    <li><a href="#"><i class="icon-pencil"></i>Applications</a></li>
+                    <li><a href="#"><i class="i"></i>Misc</a></li>*@
+                }
+            </ul>
+        </div>
+    </div>
+    <div class="span9">
 
-</table>
-}
+        @if (modelInfos != null)
+        {
+            int recNum = 0;
+            <table class="table table-hover">
+                <tr>
+                    <th style="width:30px">#
+                    </th>
+                    <th style="width:150px">Collection
+                    </th>
+                    <th>Records
+                    </th>
+                    <th style="width:100px"></th>
+                </tr>
+
+                @foreach (var item in modelInfos)
+                {
+                    recNum++;
+                    <tr>
+
+                        <td>
+                            @recNum
+                        </td>
+                        <td>
+                            <a href="@Url.RouteUrl("MvcAdmin_Generic", new { controller = item.ControllerName, action = "Index" })">@item.DisplayName</a>
+                        </td>
+                        <td>
+                            <div class="progress progress-striped">
+                                <div class="bar" style="width: @(item.RecordsCount*100/allRecords)%;">
+                                    <span class="pull-left" style="margin-left:10px"   >@item.RecordsCount</span>
+                                </div>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="@Url.RouteUrl("MvcAdmin_Generic", new { controller = item.ControllerName, action = "Index" })" class="btn">View</a>
+                            <a href="@Url.RouteUrl("MvcAdmin_Generic", new { controller = item.ControllerName, action = "Create" })" class="btn">New</a>
+                            
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        }
+    </div>
+</div>

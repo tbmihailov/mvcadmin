@@ -14,37 +14,43 @@
     DataContextHost host = new DataContextHost(myType, typeof(MvcAdminResearch.Models.NotesappContext));
     var propsEligible = ScaffoldHelpers.GetEligibleProperties(myType, host);
 
-    string primaryKeyName = host.ModelProperties.FirstOrDefault(p=>p.IsPrimaryKey).Name;
+    string primaryKeyName = host.ModelProperties.FirstOrDefault(p => p.IsPrimaryKey).Name;
     var priamryKeyValue = myType.GetProperty(primaryKeyName).GetValue(myObject);
 }
 
 <h2>Details</h2>
 
 <fieldset>
-     <legend>@myObject.GetType().Name</legend>
-        @foreach (var prop in propsEligible)
+    <legend>@myObject.GetType().Name</legend>
+    @foreach (var prop in propsEligible)
+    {
+        if (!prop.IsPrimaryKey && !prop.IsReadOnly && !prop.IsForeignKey)
         {
-            if (!prop.IsPrimaryKey && !prop.IsReadOnly && !prop.IsForeignKey)
-            {
-            <div class="editor-label">
+        <dl class="dl-horizontal">
+            <dt>
                 @Html.Label(prop.Name)
-            </div>
-            <div class="editor-field">
+            </dt>
+            <dd>
                 @Html.Display(prop.Name)
-            </div>
-            }
-            else if (prop.IsForeignKey)
-            {
-            <div class="editor-label">
-                @Html.Label(prop.Name)
-            </div>
-            <div class="editor-field">
-                @Html.Display(prop.Name)
-            </div>
-            }
+            </dd>
+        </dl>
         }
+        else if (prop.IsForeignKey)
+        {
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.Label(prop.Name)
+            </dt>
+            <dd>
+                @Html.Display(prop.Name)
+            </dd>
+        </dl>
+        }
+    }
 </fieldset>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = @priamryKeyValue}) |
-    @Html.ActionLink("Back to List", "Index")
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=@priamryKeyValue }, new { @class="btn btn-primary"}) |
+    @Html.ActionLink("Back to list", "Index", null, new { @class="btn"})
+</p>
 </p>
