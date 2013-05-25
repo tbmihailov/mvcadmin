@@ -28,5 +28,10 @@ namespace MvcAdminResearch.Controllers
 
             return View();
         }
+
+        public ActionResult Test()
+        {
+            return View();
+        }
     }
 }

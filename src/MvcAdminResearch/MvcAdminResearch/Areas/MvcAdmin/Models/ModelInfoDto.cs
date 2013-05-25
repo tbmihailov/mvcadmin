@@ -10,5 +10,7 @@ namespace MvcAdminResearch.Areas.MvcAdmin.Models
         public string ControllerName { get; set; }
         public string DisplayName { get; set; }
         public int RecordsCount { get; set; }
+        public string ActionName { get; set; }
+        public bool IsSelected { get; set; }
     }
 }

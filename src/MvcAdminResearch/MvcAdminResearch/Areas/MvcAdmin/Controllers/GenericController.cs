@@ -7,16 +7,27 @@ using System.Web;
 using System.Web.Mvc;
 using MvcAdminResearch.Models;
 using MvcAdminResearch.Helpers;
+using MvcAdminResearch.Areas.MvcAdmin.Models;
 
 namespace MvcAdminResearch.Areas.MvcAdmin.Controllers
 {
     //[Authorize]
-    public class GenericController<TModel, TContext> : Controller where  TModel : class, new() where TContext:DbContext, new()
+    public class GenericController<TModel, TContext> : Controller
+        where TModel : class, new()
+        where TContext : DbContext, new()
     {
         private TContext db = new TContext();
         DataContextHost host = new DataContextHost(typeof(TModel), typeof(TContext));
         //
         // GET: /Generic/
+
+        protected override void Initialize(System.Web.Routing.RequestContext requestContext)
+        {
+            base.Initialize(requestContext);
+
+            //Set model infos for nav menu for all actions
+            SetModelInfosForNavMenuToViewBag();
+        }
 
         public ActionResult Index()
         {
@@ -42,7 +53,7 @@ namespace MvcAdminResearch.Areas.MvcAdmin.Controllers
         public ActionResult Create()
         {
             FillRelatedModelsData();
-            
+
             TModel item = new TModel();
             return View(item);
         }
@@ -132,6 +143,40 @@ namespace MvcAdminResearch.Areas.MvcAdmin.Controllers
             return RedirectToAction("Index");
         }
 
+        /// <summary>
+        /// Returns ModelInfos - Info about the models that are available in the undelying context
+        /// </summary>
+        /// <returns></returns>
+        private List<ModelInfoDto> GetModelInfosForNavMenu()
+        {
+            var modelInfos = new List<ModelInfoDto>();
+            string controller = ControllerContext.RouteData.Values["controller"] != null ? ControllerContext.RouteData.Values["controller"].ToString() : "";
+
+            var contextModels = db.GetType().GetModelCollectionTypesDbContext();
+            foreach (var model in contextModels)
+            {
+                string controllerName = model.Name;
+                bool isSelected = controllerName == controller;
+                var modelInfo = new ModelInfoDto
+                {
+                    ControllerName = controllerName,
+                    ActionName = "Index",
+                    DisplayName = controllerName,
+                    IsSelected = isSelected
+                };
+
+                modelInfos.Add(modelInfo);
+            }
+            modelInfos = modelInfos.OrderBy(mi => mi.DisplayName).ToList();
+            return modelInfos;
+        }
+
+        public void SetModelInfosForNavMenuToViewBag()
+        {
+            var modelInfos = GetModelInfosForNavMenu();
+            ViewBag.ModelInfos = modelInfos;
+        }
+
         protected override void Dispose(bool disposing)
         {
             db.Dispose();
@@ -139,6 +184,6 @@ namespace MvcAdminResearch.Areas.MvcAdmin.Controllers
         }
     }
 
-  
+
 
 }

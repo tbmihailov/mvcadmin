@@ -24,6 +24,19 @@ namespace MvcAdminResearch.Areas.MvcAdmin
         private static void RegisterRoutes(AreaRegistrationContext context)
         {
             context.MapRoute(
+                "MvcAdmin_panel_navmenu",
+                "MvcAdmin/Panel/NavMenu",
+                new
+                {
+                    controller = "Panel",//not used
+                    action = "NavMenu",
+
+                    controllerFactory = new CustomControllerFactory(),//custom controller factory
+                    controllerType = typeof(PanelController<NotesappContext>)//custom controller
+                }
+            );
+
+            context.MapRoute(
                 "MvcAdmin_panel",
                 "MvcAdmin/Panel/{action}/{id}",
                 new
@@ -31,7 +44,6 @@ namespace MvcAdminResearch.Areas.MvcAdmin
                     controller = "Panel",//not used
                     action = "Dashboard",
                     id = UrlParameter.Optional,
-
                     controllerFactory = new CustomControllerFactory(),//custom controller factory
                     controllerType = typeof(PanelController<NotesappContext>)//custom controller
                 }
@@ -55,7 +67,7 @@ namespace MvcAdminResearch.Areas.MvcAdmin
                 "MvcAdmin/m/{controller}/{action}/{id}",
                 new
                 {
-                    controllerFactory = new GenericControllerFactory(),//custom controller factory
+                    controllerFactory = new GenericControllerFactory(),//custom controller factory2
                     dataContextType = typeof(MvcAdminResearch.Models.NotesappContext),//Data context type  
                     controller = "Note",
                     action = "Index",

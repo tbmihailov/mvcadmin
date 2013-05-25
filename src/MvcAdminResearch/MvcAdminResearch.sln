@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAdminResearch", "MvcAdminResearch\MvcAdminResearch.csproj", "{2D042940-CFCB-442E-A880-42ED638E928D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvcAdminTests", "MvcAdminTests\MvcAdminTests.csproj", "{1EDBF40E-AED3-47B1-AAC0-A756400C3F1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{2D042940-CFCB-442E-A880-42ED638E928D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D042940-CFCB-442E-A880-42ED638E928D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D042940-CFCB-442E-A880-42ED638E928D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1EDBF40E-AED3-47B1-AAC0-A756400C3F1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1EDBF40E-AED3-47B1-AAC0-A756400C3F1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1EDBF40E-AED3-47B1-AAC0-A756400C3F1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1EDBF40E-AED3-47B1-AAC0-A756400C3F1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

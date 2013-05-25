@@ -18,10 +18,10 @@
     
 }
 
-<h2>Index</h2>
+<h2>@host.EntitySetName</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", null, new { @class="btn"})
+    @Html.ActionLink("Create new", "Create", null, new { @class = "btn" })
 </p>
 <table class="table table-hover">
     <tr>
@@ -31,24 +31,24 @@
         }
         <th></th>
     </tr>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @foreach (var propName in displayPropertyNames)
+                {
+                    <th>@myType.GetProperty(propName).GetValue(item)</th>
+                }
 
-    @foreach (var item in Model)
-    {
-        <tr>
-            @foreach (var propName in displayPropertyNames)
-            {
-                <th>@myType.GetProperty(propName).GetValue(item)</th>
-            }
-
-            @{var priamryKeyValue = myType.GetProperty(primaryKeyName).GetValue(item);
+                @{var priamryKeyValue = myType.GetProperty(primaryKeyName).GetValue(item);
             
-                		<td>
-			@Html.ActionLink("Edit", "Edit", new { id=priamryKeyValue }, new { @class="btn btn-primary" }) |
-			@Html.ActionLink("Details", "Details", new { id=priamryKeyValue }, new { @class="btn btn-info" }) |
-			@Html.ActionLink("Delete", "Delete", new { id=priamryKeyValue }, new { @class="btn btn-danger" })
-		</td>
-            }
-        </tr>
-    }
-
+                    <td>
+                        @Html.ActionLink(" ", "Edit", new { id = priamryKeyValue }, new { @class = "icon-edit" }) 
+			            @Html.ActionLink(" ", "Details", new { id = priamryKeyValue }, new { @class = "icon-info-sign" }) 
+			            @Html.ActionLink(" ", "Delete", new { id = priamryKeyValue }, new { @class = "icon-trash" })
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
 </table>

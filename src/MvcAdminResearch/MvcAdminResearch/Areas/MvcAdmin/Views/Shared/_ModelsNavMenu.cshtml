@@ -1,0 +1,17 @@
+﻿@{
+    var modelInfos = ViewBag.ModelInfos;
+}
+
+<div class="well" style="padding: 8px 0; margin-bottom: 0;">
+    <ul class="nav nav-list">
+        <li class="nav-header">Navigation</li>
+        @if (modelInfos != null)
+        {
+            foreach (var item in modelInfos)
+            {
+                string classSelected = item.IsSelected ? "active" : string.Empty;
+            <li><a class="@classSelected" href="@Url.RouteUrl("MvcAdmin_Generic", new { controller = item.ControllerName, action = item.ActionName })"><i class="i"></i>@item.DisplayName</a></li>
+            }
+        }
+    </ul>
+</div>

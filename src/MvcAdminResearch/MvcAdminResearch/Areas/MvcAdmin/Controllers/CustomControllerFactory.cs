@@ -14,6 +14,7 @@ namespace MvcAdminResearch.Areas.MvcAdmin.Controllers
     /// </summary>
     public class CustomControllerFactory : IControllerFactory
     {
+        
         public IController CreateController(System.Web.Routing.RequestContext requestContext, string controllerName)
         {
             object controllerTypeObj;

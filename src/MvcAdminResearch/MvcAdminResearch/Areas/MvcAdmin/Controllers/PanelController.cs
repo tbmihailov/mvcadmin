@@ -45,7 +45,7 @@ namespace MvcAdminResearch.Areas.MvcAdmin.Controllers
                     RecordsCount = recordsCount,
                 });
             }
-
+            modelInfos = modelInfos.OrderBy(mi => mi.DisplayName).ToList();
             ViewBag.ModelInfos = modelInfos;
 
             return View();

@@ -34,7 +34,7 @@
 
     <div class="navbar navbar-fixed-top">
         <div class="navbar-inner">
-            <div class="container">
+            <div class="container-fluid">
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -44,9 +44,9 @@
                 <div class="nav-collapse">
                     <ul class="nav pull-left">
                         <li>
-                            @Html.ActionLink("Dashboard", "Dashboard", "Panel")
+                            @Html.ActionLink("Dashboard", "Dashboard", "Panel", null)
                         </li>
-                       @* <li>
+                        @* <li>
                             @Html.ActionLink("Groups", "Index", "Groups")
                         </li>
                         <li>
@@ -60,8 +60,15 @@
         </div>
     </div>
 
-    <div class="container container-main">
-        @RenderBody()
+    <div class="container-fluid container-main">
+        <div class="row-fluid">
+            <div class="span3">
+                @*@Html.Action("NavMenu", "Panel", new { area="MvcAdmin"})*@
+                @Html.Partial("_ModelsNavMenu")
+            </div>
+        <div class="span9">
+            @RenderBody()
+        </div>
     </div>
 
 
