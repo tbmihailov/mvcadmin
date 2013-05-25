@@ -25,8 +25,6 @@ namespace MvcAdminResearch.Areas.MvcAdmin
             bundles.Add(new ScriptBundle("~/Areas/MvcAdmin/bundles/modernizr").Include(
                         "~/Areas/MvcAdmin/Scripts/modernizr-*"));
 
-            bundles.Add(new StyleBundle("~/Areas/MvcAdmin/Content/css").Include("~/Areas/MvcAdmin/Content/site.css"));
-
             bundles.Add(new StyleBundle("~/Areas/MvcAdmin/Content/themes/base/css").Include(
                         "~/Areas/MvcAdmin/Content/themes/base/jquery.ui.core.css",
                         "~/Areas/MvcAdmin/Content/themes/base/jquery.ui.resizable.css",

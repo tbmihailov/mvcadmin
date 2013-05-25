@@ -7,7 +7,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Web.Http;
 using System.Web.Mvc;
 using System.Collections;
 
@@ -16,6 +15,7 @@ namespace MvcAdminResearch.Areas.MvcAdmin.Controllers
     /// <summary>
     /// Controller for MvcAdmin main panel
     /// </summary>
+    [Authorize]
     public class PanelController<TContext> : Controller where TContext:DbContext, new()
     {
         Type _contextType;

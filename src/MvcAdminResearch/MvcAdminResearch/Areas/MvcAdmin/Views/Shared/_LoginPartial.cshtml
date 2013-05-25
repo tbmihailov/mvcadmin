@@ -4,13 +4,13 @@
     {
 
         <li>
-            @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: null, htmlAttributes: new { @class = "username", title = "Manage" })
+            @Html.ActionLink(User.Identity.Name, "Manage", "Account", routeValues: new { area = "" }, htmlAttributes: new { @class = "username", title = "Manage" })
         </li>
         <li>
-            @using (Html.BeginForm("LogOff", "Account", new RouteValueDictionary(new { area = "" }), FormMethod.Post, new { id = "logoutForm" }))
+            @using (Html.BeginForm("LogOff", "Account", new { area = "" }, FormMethod.Post, new { id = "logoutForm" }))
             {
                 @Html.AntiForgeryToken()
-                <a href="javascript:document.getElementById('logoutForm').submit()" class="label label-important" style="color:white; margin: 10px">Log out</a>
+                <a href="javascript:document.getElementById('logoutForm').submit()" class="label label-important" style="color: white; margin: 10px">Log out</a>
             }
         </li>
 
@@ -18,7 +18,7 @@
     else
     {
         <li>
-            @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "navbar-link" })
+            @Html.ActionLink("Log in", "Login", "Account", routeValues: new { area = "" }, htmlAttributes: new { id = "navbar-link" })
         </li>
     }
 </ul>

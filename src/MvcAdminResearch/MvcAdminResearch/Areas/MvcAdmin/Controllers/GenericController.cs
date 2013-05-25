@@ -11,7 +11,7 @@ using MvcAdminResearch.Areas.MvcAdmin.Models;
 
 namespace MvcAdminResearch.Areas.MvcAdmin.Controllers
 {
-    //[Authorize]
+    [Authorize]
     public class GenericController<TModel, TContext> : Controller
         where TModel : class, new()
         where TContext : DbContext, new()
