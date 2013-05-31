@@ -11,7 +11,7 @@
     var myObject = Model;
     Type myType = myObject.GetType();
 
-    DataContextHost host = new DataContextHost(myType, typeof(MvcAdminResearch.Models.NotesappContext));
+    IModelContextHost host = (IModelContextHost)ViewBag.ModelContextHost;
     var propsEligible = ScaffoldHelpers.GetEligibleProperties(myType, host);
 
     string primaryKeyName = host.ModelProperties.FirstOrDefault(p => p.IsPrimaryKey).Name;

@@ -17,7 +17,7 @@ namespace MvcAdminResearch.Areas.MvcAdmin.Controllers
         where TContext : DbContext, new()
     {
         private TContext db = new TContext();
-        DataContextHost host = new DataContextHost(typeof(TModel), typeof(TContext));
+        IModelContextHost host = new ModelDbContextHost(typeof(TModel), typeof(TContext));
         //
         // GET: /Generic/
 
@@ -27,6 +27,7 @@ namespace MvcAdminResearch.Areas.MvcAdmin.Controllers
 
             //Set model infos for nav menu for all actions
             SetModelInfosForNavMenuToViewBag();
+            ViewBag.ModelContextHost = host;
         }
 
         public ActionResult Index()

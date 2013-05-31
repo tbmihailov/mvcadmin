@@ -17,7 +17,7 @@ using System.Web;
 
 namespace MvcAdminResearch.Helpers
 {
-    public class DataContextHost
+    public class ModelDbContextHost : MvcAdminResearch.Helpers.IModelContextHost
     {
         //        ContextType	System.Type	The type of the data context.
         public Type ContextType { get; set; }
@@ -38,7 +38,7 @@ namespace MvcAdminResearch.Helpers
         public Dictionary<string, RelatedModel> RelatedProperties { get; set; }
         public List<ModelProperty> ModelProperties { get; set; }
 
-        public DataContextHost(Type modelType, Type contextType)
+        public ModelDbContextHost(Type modelType, Type contextType)
         {
             this.ContextType = contextType;
 
@@ -414,14 +414,14 @@ namespace MvcAdminResearch.Helpers
 
         // This will return the primary key property name, if and only if there is exactly
         // one primary key. Returns null if there is no PK, or the PK is composite.
-        public static string GetPrimaryKeyName(Type type, DataContextHost host)
+        public static string GetPrimaryKeyName(Type type, IModelContextHost host)
         {
             IEnumerable<string> pkNames = GetPrimaryKeyNames(type, host);
             return pkNames.Count() == 1 ? pkNames.First() : null;
         }
 
         // This will return all the primary key names. Will return an empty list if there are none.
-        public static IEnumerable<string> GetPrimaryKeyNames(Type type, DataContextHost host)
+        public static IEnumerable<string> GetPrimaryKeyNames(Type type, IModelContextHost host)
         {
             return GetEligibleProperties(type, host).Where(mp => mp.IsPrimaryKey).Select(mp => mp.Name);
         }
@@ -433,7 +433,7 @@ namespace MvcAdminResearch.Helpers
         //}
 
         // A foreign key, e.g. CategoryID, will have a value expression of Category.CategoryID
-        public static string GetValueExpressionSuffix(PropertyInfo property, DataContextHost host)
+        public static string GetValueExpressionSuffix(PropertyInfo property, IModelContextHost host)
         {
             RelatedModel propertyModel;
             host.RelatedProperties.TryGetValue(property.Name, out propertyModel);
@@ -442,7 +442,7 @@ namespace MvcAdminResearch.Helpers
         }
 
         // A foreign key, e.g. CategoryID, will have an association name of Category
-        public static string GetAssociationName(PropertyInfo property, DataContextHost host)
+        public static string GetAssociationName(PropertyInfo property, IModelContextHost host)
         {
             RelatedModel propertyModel;
             host.RelatedProperties.TryGetValue(property.Name, out propertyModel);
@@ -451,7 +451,7 @@ namespace MvcAdminResearch.Helpers
         }
 
         // Helper
-        public static List<ModelProperty> GetEligibleProperties(Type type, DataContextHost host)
+        public static List<ModelProperty> GetEligibleProperties(Type type, IModelContextHost host)
         {
             List<ModelProperty> results = new List<ModelProperty>();
 
