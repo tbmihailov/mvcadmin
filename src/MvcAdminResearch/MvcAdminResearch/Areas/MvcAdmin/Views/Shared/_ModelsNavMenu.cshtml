@@ -10,7 +10,10 @@
             foreach (var item in modelInfos)
             {
                 string classSelected = item.IsSelected ? "active" : string.Empty;
-            <li><a class="@classSelected" href="@Url.RouteUrl("MvcAdmin_Generic", new { controller = item.ControllerName, action = item.ActionName })"><i class="i"></i>@item.DisplayName</a></li>
+            <li class="@classSelected">
+                <a  href="@Url.RouteUrl("MvcAdmin_Generic", new { controller = item.ControllerName, action = item.ActionName })"><i class="i"></i>@item.DisplayName
+                </a>
+            </li>
             }
         }
     </ul>

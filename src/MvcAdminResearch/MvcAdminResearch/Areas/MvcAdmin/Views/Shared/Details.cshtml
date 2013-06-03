@@ -1,4 +1,4 @@
-﻿model Object
+﻿@model Object
 
 @using System.Reflection
 @using System.Linq.Expressions
@@ -14,6 +14,7 @@
     IModelContextHost host = (IModelContextHost)ViewBag.ModelContextHost;
     var propsEligible = ScaffoldHelpers.GetEligibleProperties(myType, host);
 
+    string modelTypeName = host.ModelTypeName;
     string primaryKeyName = host.ModelProperties.FirstOrDefault(p => p.IsPrimaryKey).Name;
     var priamryKeyValue = myType.GetProperty(primaryKeyName).GetValue(myObject);
 }
@@ -21,7 +22,7 @@
 <h2>Details</h2>
 
 <fieldset>
-    <legend>@myType.Name</legend>
+    <legend>@modelTypeName</legend>
     @foreach (var prop in propsEligible)
     {
         if (!prop.IsPrimaryKey && !prop.IsReadOnly && !prop.IsForeignKey)

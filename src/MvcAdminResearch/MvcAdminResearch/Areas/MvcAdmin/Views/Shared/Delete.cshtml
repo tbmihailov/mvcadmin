@@ -12,6 +12,7 @@
     Type myType = myObject.GetType();
 
     IModelContextHost host = (IModelContextHost)ViewBag.ModelContextHost;
+    string modelTypeName = host.ModelTypeName;
     var propsEligible = ScaffoldHelpers.GetEligibleProperties(myType, host);
 }
 
@@ -19,7 +20,7 @@
 
 <h3>Are you sure you want to delete this?</h3>
 <fieldset>
-    <legend>@myType.Name</legend>
+    <legend>@modelTypeName</legend>
     @foreach (var prop in propsEligible)
     {
         if (!prop.IsPrimaryKey && !prop.IsReadOnly && !prop.IsForeignKey)
